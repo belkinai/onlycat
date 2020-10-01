@@ -1,0 +1,4 @@
+body, html, .app {
+  position: relative;
+  height: 100%;
+}
