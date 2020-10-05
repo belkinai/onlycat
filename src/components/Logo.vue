@@ -10,6 +10,6 @@
     line-height: 48px;
     font-size: 32px;
     font-weight: 700;
-    color: blueviolet;
+    color: #fff;
   }
 </style>

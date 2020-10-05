@@ -1,5 +1,8 @@
 <template>
   <div class="page">
+    <sim-modal v-model="$store.state.createTranslationModal">
+      <div>!!!</div>
+    </sim-modal>
     <sim-panel>
       <logo/>
       <sim-spacer/>
@@ -14,11 +17,15 @@
 <script>
   import SimPanel from '@/components/SimPanel.vue';
   import SimContainer from '@/components/SimContainer.vue';
-  import Logo from '@/components/Logo.vue';
   import SimSpacer from '@/components/SimSpacer.vue';
+  import SimModal from '@/components/SimModal.vue';
+  import Logo from '@/components/Logo.vue';
   import PanelFooter from '@/components/PanelFooter.vue';
   export default {
-    components: {SimPanel, SimContainer, SimSpacer, Logo, PanelFooter},
+    components: {SimPanel, SimContainer, SimSpacer, SimModal, Logo, PanelFooter},
+    beforeCreate() {
+      this.$store.commit('initializeTranslations');
+    },
   }
 </script>
 
@@ -29,6 +36,6 @@
     height: 100%;
     min-height: 100%;
     padding: 30px;
-    background: #e0e4ea;
+    background: #fff;
   }
 </style>

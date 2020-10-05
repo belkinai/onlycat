@@ -12,7 +12,16 @@ export default {
   data() {
     return {
       text: '',
+      translations: {},
     };
+  },
+  created() {
+    this.getTranslations();
+  },
+  methods: {
+    getTranslations() {
+      this.translations = this.$store.state.translations;
+    },
   },
 }
 </script>
