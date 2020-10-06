@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <sim-modal v-model="$store.state.createTranslationModal">
-      <div>!!!</div>
+      <create-translation/>
     </sim-modal>
     <sim-panel>
       <logo/>
@@ -21,8 +21,10 @@
   import SimModal from '@/components/SimModal.vue';
   import Logo from '@/components/Logo.vue';
   import PanelFooter from '@/components/PanelFooter.vue';
+  import CreateTranslation from '@/components/CreateTranslation.vue';
+
   export default {
-    components: {SimPanel, SimContainer, SimSpacer, SimModal, Logo, PanelFooter},
+    components: {SimPanel, SimContainer, SimSpacer, SimModal, Logo, PanelFooter, CreateTranslation},
     beforeCreate() {
       this.$store.commit('initializeTranslations');
     },
