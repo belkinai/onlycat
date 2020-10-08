@@ -3,14 +3,17 @@
     <div class="create-translation__header">
       Добавить текст для перевода
     </div>
-    <div class="modal-close" @click="$store.state.createTranslationModal = false">⃝</div>
-  </sim-window>>
+    <div class="modal-close" @click="createTranslationModal = false">&#9711;</div>
+  </sim-window>
 </template>
 
 <script>
 import SimWindow from '@/components/SimWindow.vue';
+import CreateTranslationModal from '@/mixins/modals/createTranslationModal.js';
+
 export default {
   components: {SimWindow},
+  mixins: [CreateTranslationModal],
   data() {
     return {
       translation: {},

@@ -1,9 +1,10 @@
 import { createStore } from 'vuex'
 
 export default createStore({
+  strict: true,
   state: {
     translations: {},
-    createTranslationModal: true,
+    createTranslationModal: false,
   },
   mutations: {
     initializeTranslations(state) {
@@ -12,6 +13,9 @@ export default createStore({
     addTranslation(state, key, translation) {
       state.translations[key] = translation;
       localStorage.setItem('translations', state.translations);
+    },
+    setCreateTranslationModal(state, value) {
+      state.createTranslationModal = value;
     }
   },
   actions: {
