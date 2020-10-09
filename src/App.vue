@@ -42,6 +42,7 @@ export default {
   height: 100%;
   min-height: 100%;
   padding: 30px;
-  background: #fff;
+  background-color: #fff;
+  background-image: url('/bg2.jpg');
 }
 </style>

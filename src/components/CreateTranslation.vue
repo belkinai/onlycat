@@ -1,53 +1,37 @@
 <template>
   <sim-window>
-    <div class="create-translation__header">
+    <sim-window-header>
       Добавить текст для перевода
-    </div>
-    <div class="modal-close" @click="createTranslationModal = false">&#9711;</div>
+    </sim-window-header>
+    <sim-window-body>
+      <sim-text-field v-model="name"/>
+    </sim-window-body>
+    <sim-window-footer>
+      <sim-btn lg>Добавить</sim-btn>
+    </sim-window-footer>
   </sim-window>
 </template>
 
 <script>
+import SimBtn from '@/components/SimBtn.vue';
 import SimWindow from '@/components/SimWindow.vue';
+import SimWindowHeader from '@/components/SimWindowHeader.vue';
+import SimWindowBody from '@/components/SimWindowBody.vue';
+import SimWindowFooter from '@/components/SimWindowFooter.vue';
+import SimTextField from '@/components/SimTextField.vue';
 import CreateTranslationModal from '@/mixins/modals/createTranslationModal.js';
 
 export default {
-  components: {SimWindow},
+  components: { SimBtn, SimWindow, SimWindowHeader, SimWindowBody, SimWindowFooter, SimTextField },
   mixins: [CreateTranslationModal],
   data() {
     return {
       translation: {},
+      name: '',
     };
   },
 }
 </script>
 
 <style>
-.create-translation__header {
-  height: 80px;
-  padding: 0 40px;
-  line-height: 80px;
-  font-size: 22px;
-  font-weight: 300;
-  color: rgba(255, 255, 255, 0.92);
-  background: linear-gradient(-5deg, #311a99 20%, #4a39bb 100%);
-}
-.modal-close {
-  position: absolute;
-  top: 20px;
-  right: 24px;
-  width: 40px;
-  height: 40px;
-  line-height: 40px;
-  font-size: 24px;
-  text-align: center;
-  color: rgba(255, 255, 255, 0.87);
-  cursor: pointer;
-  transition: all .2s;
-}
-.modal-close:hover {
-  color: rgba(255, 255, 255, 1);
-  text-shadow: 0 0 3px rgba(255, 255, 255, 0.5);
-  transform: scale(1.2);
-}
 </style>
