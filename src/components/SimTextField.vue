@@ -30,7 +30,7 @@
     justify-content: center;
     width: 100%;
     height: 40px;
-    padding: 0 20px;
+    padding: 0 10px;
     border-radius: 4px;
     background: rgba(255, 255, 255, 0.5);
     transition: all .1s;

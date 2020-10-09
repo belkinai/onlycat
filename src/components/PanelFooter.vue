@@ -3,7 +3,7 @@
     <div class="panel-footer__caption">
       Проект журнала "Понедельник начинается в субботу"
     </div>
-    <img style="height: 40px;" src="ps-logo-1-80.png" alt="">
+    <img style="height: 40px;" src="ps-logo-1-c-80.png" alt="">
   </div>
 </template>
 
@@ -14,7 +14,7 @@
     align-items: center;
     text-align: center;
     font-size: 12px;
-    color: #cce;
+    color: #334;
   }
   .panel-footer__caption {
     margin: 10px 0;

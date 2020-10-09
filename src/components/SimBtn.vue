@@ -28,15 +28,15 @@
     border-radius: 4px;
     border: none;
     outline: none;
-    background: #f8f8f8;
+    background: #e0e4ea;
     text-transform: uppercase;
     transition: all .1s linear;
   }
   .sim-btn:hover {
-    background: #e0e0e0;
+    background: #b4b8bc;
   }
   .sim-btn:active {
-    background: #c0c0c0;
+    background: #9ca0a3;
   }
   .sim-btn_block {
     width: 100%;

@@ -8,7 +8,8 @@
   .sim-container {
     display: flex;
     flex-direction: column;
-    height: 100%;
     flex-grow: 1;
+    height: 100%;
+    padding: 32px
   }
 </style>

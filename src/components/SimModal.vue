@@ -31,16 +31,14 @@ export default {
 .sim-modal {
   position: fixed;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   padding: 0 80px;
-  background: rgba(235, 235, 235, 0.57);
-  /*background: rgba(0, 0, 0, 0.87);*/
-  backdrop-filter: blur(32px);
+  background: rgba(0, 0, 0, 0.37);
 }
 .modal-close {
   position: absolute;

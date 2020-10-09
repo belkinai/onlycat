@@ -15,9 +15,8 @@
   max-height: 100%;
   padding: 0 40px;
   overflow: hidden;
-  /*background: #f0f0f0;*/
-  /*background: rgba(255, 255, 255, 0.05);*/
-  border-radius: 20px;
-  /*box-shadow: 0 10px 32px rgba(0, 0, 0, 0.37);*/
+  background: #e0e4ea;
+  border-radius: 4px;
+  box-shadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2), 0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 9px 46px 8px rgba(0, 0, 0, 0.12);
 }
 </style>
