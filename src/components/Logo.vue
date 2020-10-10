@@ -1,7 +1,7 @@
 <template>
-  <div class="logo">
+  <router-link :to="{name: 'Home'}" class="logo">
     SIMCAT
-  </div>
+  </router-link>
 </template>
 
 <style>
@@ -13,5 +13,13 @@
     font-weight: 100;
     color: #334;
     text-shadow: 3px 0 0 #a859ff;
+    text-decoration: none;
+    transition: all .15s;
+  }
+  .logo:hover {
+    transform: scale(1.1);
+  }
+  .logo:active {
+    transform: scale(0.9);
   }
 </style>

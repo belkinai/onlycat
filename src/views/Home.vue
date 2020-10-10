@@ -1,7 +1,9 @@
 <template>
   <div class="home">
-    <textarea v-model="text"/>
-    <router-link :to="{name: 'Translate', params: {id: 'asd'}}">Перевод</router-link>
+    <h1>Ваши переводы</h1>
+    <div v-for="(translation, i) in translations" :key="i">
+      <router-link :to="{name: 'Translate', params: {uuid: i}}">{{ translation.name }}</router-link>
+    </div>
   </div>
 </template>
 
@@ -9,18 +11,11 @@
 
 export default {
   name: 'Home',
-  data() {
-    return {
-      text: '',
-      translations: {},
-    };
-  },
-  created() {
-    this.getTranslations();
-  },
-  methods: {
-    getTranslations() {
-      this.translations = this.$store.state.translations;
+  computed: {
+    translations: {
+      get() {
+        return this.$store.state.translations;
+      },
     },
   },
 }

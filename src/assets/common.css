@@ -7,6 +7,11 @@ body, html, .app {
   height: 100%;
   font-family: 'Roboto', sans-serif;
 }
+.page h1 {
+  font-weight: 100;
+  font-size: 36px;
+  margin: 12px 0 30px;
+}
 
 /*Transitions*/
 .modal-enter-active, .modal-leave-active {

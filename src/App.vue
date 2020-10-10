@@ -41,6 +41,6 @@ export default {
   flex-direction: row;
   height: 100%;
   min-height: 100%;
-  background-color: #fff;
+  background-color: #f5f9fd;
 }
 </style>

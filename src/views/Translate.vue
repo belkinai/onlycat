@@ -1,16 +1,14 @@
 <template>
   <div class="home">
-    <textarea v-model="text"/>
-    <button @click="makeSentences">Ok</button>
+    <h1>{{ translation.name }}</h1>
     <button @click="translate">Translate</button>
-    {{ activeIndex }}
     <div class="main-fields">
       <div class="main-filed-sentences">
-        <span  class="main-filed-sentence" style="white-space: pre-line" v-for="(sentence, j) in sentences" :key="j"
+        <span  class="main-filed-sentence" style="white-space: pre-line" v-for="(sentence, j) in translation.originalSentences" :key="j"
                :class="{active: j === activeIndex}">{{ sentence }}</span>
       </div>
       <div class="main-filed-sentences">
-        <span class="main-filed-sentence" style="white-space: pre-line" v-for="(sentence, i) in translated" :key="i"
+        <span class="main-filed-sentence" style="white-space: pre-line" v-for="(sentence, i) in translation.translatedSentences" :key="i"
               contenteditable
               :class="{active: i === activeIndex}"
               @focusin="activeIndex = i"
@@ -30,7 +28,9 @@
 
   export default {
     name: 'Translate',
-    props: ['id'],
+    props: {
+      uuid: String,
+    },
     components: {
       // HelloWorld
     },
@@ -42,16 +42,17 @@
         activeIndex: -1,
       };
     },
+    computed: {
+      translation: {
+        get() {
+          return this.$store.state.translations[this.uuid];
+        }
+      },
+    },
     methods: {
-      up(e, i) {
-        this.translated[i] = e.target.innerText;
-      },
-      makeSentences() {
-        let text = this.text;
-        this.sentences = text.match( /[^.!?]+[.!?]+["']?|\s*$/g );
-      },
       translate() {
-        this.translated = this.sentences;
+        console.log(this.uuid);
+        this.translation.translatedSentences = this.translation.originalSentences;
       },
     },
   }

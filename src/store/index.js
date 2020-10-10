@@ -8,11 +8,15 @@ export default createStore({
   },
   mutations: {
     initializeTranslations(state) {
-      state.translations = localStorage.getItem('translations');
+      let localTranslations = localStorage.getItem('translations');
+      if (localTranslations) {
+        state.translations = JSON.parse(localTranslations);
+      }
     },
-    addTranslation(state, key, translation) {
-      state.translations[key] = translation;
-      localStorage.setItem('translations', state.translations);
+    addTranslation(state, data) {
+      state.translations[data.key] = data.value;
+      console.log(state.translations);
+      localStorage.setItem('translations', JSON.stringify(state.translations));
     },
     setCreateTranslationModal(state, value) {
       state.createTranslationModal = value;
