@@ -3,7 +3,9 @@
           :class="{
             'sim-btn_block': block,
             'sim-btn_lg': lg,
+            'sim-btn_dark': dark,
           }"
+          :style="{background: color}"
   >
     <slot/>
   </button>
@@ -12,8 +14,10 @@
 <script>
   export default {
     props: {
+      dark:  Boolean,
       block: Boolean,
-      lg: Boolean,
+      lg:    Boolean,
+      color: String,
     },
   }
 </script>
@@ -21,6 +25,7 @@
 <style>
   .sim-btn {
     display: flex;
+    position: relative;
     align-items: center;
     justify-content: center;
     padding: 0 24px;
@@ -32,11 +37,19 @@
     text-transform: uppercase;
     transition: all .1s linear;
   }
-  .sim-btn:hover {
-    background: #b4b8bc;
+  .sim-btn:before {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    content: '';
+    background: rgba(0, 0, 0, 0);
+    transition: all .15s;
   }
-  .sim-btn:active {
-    background: #9ca0a3;
+  .sim-btn:hover:before {
+    background: rgba(0, 0, 0, 0.1);
+  }
+  .sim-btn:active:before {
+    background: rgba(0, 0, 0, 0.2);
   }
   .sim-btn_block {
     width: 100%;
@@ -44,5 +57,8 @@
   .sim-btn_lg {
     height: 48px;
     border-radius: 4px;
+  }
+  .sim-btn_dark {
+    color: rgba(255, 255, 255, 0.92);
   }
 </style>
