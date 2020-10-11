@@ -3,7 +3,7 @@
     <div class="panel-footer__caption">
       Проект журнала "Понедельник начинается в субботу"
     </div>
-    <img style="height: 40px;" src="ps-logo-1-c-80.png" alt="">
+    <img style="height: 40px;" src="@/assets/ps-logo-1-c-80.png" alt="">
   </div>
 </template>
 

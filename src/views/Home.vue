@@ -1,8 +1,14 @@
 <template>
   <div class="home">
     <h1>Ваши переводы</h1>
-    <div v-for="(translation, i) in translations" :key="i">
-      <router-link :to="{name: 'Translate', params: {uuid: i}}">{{ translation.name }}</router-link>
+    <div class="translation-list">
+      <div v-for="(translation, i) in translations" :key="i" class="translation-list-item">
+        <router-link :to="{name: 'Translate', params: {uuid: i}}"
+                     class="translation-list-link"
+        >
+          {{ translation.name }}
+        </router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -27,5 +33,29 @@ export default {
     flex-direction: column;
     height: 100%;
     min-height: 100%;
+    width: 960px;
+    max-width: 100%;
+  }
+  .translation-list {
+    border-radius: 4px;
+    background: #fff;
+  }
+  .translation-list-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 50px;
+    padding: 20px;
+  }
+  .translation-list-link {
+    font-size: 18px;
+    font-weight: 300;
+    color: #5116dd;
+  }
+  .translation-list-link:hover {
+    opacity: 0.9;
+  }
+  .translation-list-link:active {
+    opacity: 0.8;
   }
 </style>
