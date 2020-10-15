@@ -16,7 +16,7 @@
 
 <script>
 import firebase from 'firebase'
-import firebaseui from 'firebaseui'
+import * as firebaseui from 'firebaseui'
 import 'firebaseui/dist/firebaseui.css'
 
 export default {
@@ -29,7 +29,10 @@ export default {
     },
   },
   mounted() {
-    var ui = new firebaseui.auth.AuthUI(firebase.auth());
+    let ui = firebaseui.auth.AuthUI.getInstance()
+    if (!ui) {
+      ui = new firebaseui.auth.AuthUI(firebase.auth());
+    }
     var uiConfig = {
       signInSuccessUrl: "/",
       signInOptions: [firebase.auth.GithubAuthProvider.PROVIDER_ID]
