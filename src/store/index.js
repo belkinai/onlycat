@@ -5,6 +5,7 @@ export default createStore({
   state: {
     translations: {},
     createTranslationModal: false,
+    user: {},
   },
   mutations: {
     initializeTranslations(state) {
@@ -20,6 +21,9 @@ export default createStore({
     },
     setCreateTranslationModal(state, value) {
       state.createTranslationModal = value;
+    },
+    setUser(state, value) {
+      state.user = value
     }
   },
   actions: {
