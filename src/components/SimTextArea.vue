@@ -2,7 +2,7 @@
     <div class="sim-text-area">
         <div class="sim-text-area__wrap" :class="{focus: focus}">
             <textarea :id="uuid" rows="16"
-                      class="sim-text-area__input" type="text"
+                      class="sim-text-area__input"
                       @input="$emit('update:modelValue', $event.target.value)"
                       @focusIn="focus = true"
                       @focusOut="focus = false"/>

@@ -1,8 +1,7 @@
-import * as firebase from 'firebase/app'
-import 'firebase/auth'
-import 'firebase/firestore'
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/firestore';
 
-// firebase init
 const firebaseConfig = {
   apiKey: process.env.VUE_APP_FB_API_KEY,
   authDomain: process.env.VUE_APP_FB_AUTH_DOMAIN,
@@ -12,19 +11,16 @@ const firebaseConfig = {
   messagingSenderId: process.env.VUE_APP_FB_MESSAGING_SENDER_ID,
   appId: process.env.VUE_APP_FB_APP_ID,
   measurementId: process.env.VUE_APP_FB_MEASUREMENT_ID,
-}
-firebase.initializeApp(firebaseConfig)
+};
+firebase.initializeApp(firebaseConfig);
 
-// utils
-const db = firebase.firestore()
-const auth = firebase.auth()
+const db = firebase.firestore();
+const auth = firebase.auth();
 
-// collection references
-const docCollection = db.collection('docs')
+const translationsCollection = db.collection('translations');
 
-// export utils/refs
 export {
   db,
   auth,
-  docCollection,
-}
+  translationsCollection,
+};

@@ -1,12 +1,12 @@
 export default {
   computed: {
     createTranslationModal: {
-      get() {
+      get () {
         return this.$store.state.createTranslationModal;
       },
-      set(value) {
+      set (value) {
         this.$store.commit('setCreateTranslationModal', value);
       },
     },
   },
-}
+};

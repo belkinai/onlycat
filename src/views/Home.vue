@@ -10,7 +10,6 @@
         </router-link>
       </div>
     </div>
-    {{ user }}
   </div>
 </template>
 
@@ -24,11 +23,6 @@ export default {
         return this.$store.state.translations;
       },
     },
-    user: {
-      get() {
-        return this.$store.state.user
-      }
-    }
   },
 }
 </script>
