@@ -1,5 +1,5 @@
 <template>
-  <sim-window>
+  <sim-window width="980px">
     <sim-window-header>
       Добавить текст для перевода
     </sim-window-header>

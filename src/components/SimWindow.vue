@@ -1,15 +1,22 @@
 <template>
-  <div class="sim-window" @click.stop>
+  <div class="sim-window" @click.stop :style="{width: width}">
     <slot/>
   </div>
 </template>
+
+<script>
+export default {
+  props: {
+    width: String,
+  },
+}
+</script>
 
 <style>
 .sim-window {
   display: flex;
   flex-direction: column;
   position: relative;
-  width: 980px;
   max-width: 100%;
   max-height: 100%;
   padding: 20px 80px;

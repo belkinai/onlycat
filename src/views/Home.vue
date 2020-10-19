@@ -10,14 +10,11 @@
         </router-link>
       </div>
     </div>
-    <section id="firebaseui-auth-container"></section>
+    {{ user }}
   </div>
 </template>
 
 <script>
-import firebase from 'firebase'
-import * as firebaseui from 'firebaseui'
-import 'firebaseui/dist/firebaseui.css'
 
 export default {
   name: 'Home',
@@ -27,18 +24,12 @@ export default {
         return this.$store.state.translations;
       },
     },
-  },
-  mounted() {
-    let ui = firebaseui.auth.AuthUI.getInstance()
-    if (!ui) {
-      ui = new firebaseui.auth.AuthUI(firebase.auth());
+    user: {
+      get() {
+        return this.$store.state.user
+      }
     }
-    var uiConfig = {
-      signInSuccessUrl: "/",
-      signInOptions: [firebase.auth.GithubAuthProvider.PROVIDER_ID]
-    };
-    ui.start("#firebaseui-auth-container", uiConfig);
-  }
+  },
 }
 </script>
 

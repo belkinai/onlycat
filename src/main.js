@@ -36,9 +36,10 @@ import { auth } from './firebase';
 //   docCollection,
 // }
 
-
+let app
 auth.onAuthStateChanged(() => {
-  console.log('main');
-  const app = createApp(App).use(store).use(router);
-  app.mount('#app');
-});
+  if (!app) {
+    app = createApp(App).use(store).use(router)
+    app.mount('#app')
+  }
+})
