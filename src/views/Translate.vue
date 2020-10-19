@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h1>{{ translation.name }}</h1>
+    <h1><router-link :to="{name: 'Home'}">&larr;</router-link>{{ translation.name }}</h1>
     <button @click="translate">Translate</button>
     <div class="main-fields">
       <div class="main-filed-sentences">

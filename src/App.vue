@@ -74,6 +74,7 @@ export default {
     signOut () {
       auth().signOut().then(() => {
             this.$store.commit('unsetStoreTranslations');
+            this.$router.push('/');
           })
           .catch(() => {console.log('Sign-Out Error')});
     },

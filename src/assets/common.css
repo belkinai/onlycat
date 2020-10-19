@@ -12,6 +12,13 @@ body, html, .app {
   font-size: 36px;
   margin: 12px 0 30px;
 }
+.page h1 a {
+  margin-right: 20px;
+  text-decoration: none;
+}
+.page h1 a:hover {
+  opacity: 0.8;
+}
 
 /*Transitions*/
 .modal-enter-active, .modal-leave-active {
