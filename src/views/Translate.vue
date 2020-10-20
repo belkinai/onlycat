@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div v-if="translation" class="home">
     <h1><router-link :to="{name: 'Home'}">&larr;</router-link>{{ translation.name }}</h1>
     <button @click="translate">Translate</button>
     <div class="main-fields">
@@ -12,48 +12,53 @@
               contenteditable
               :class="{active: i === activeIndex}"
               @focusin="activeIndex = i"
-              @input="up($event, i)"
+              @input="edit($event, i)"
         >
           {{ sentence }}
         </span>
       </div>
     </div>
-    {{ translated }}
   </div>
 </template>
 
 <script>
-  // @ is an alias to /src
-  // import HelloWorld from '@/components/HelloWorld.vue'
-
   export default {
     name: 'Translate',
     props: {
       uuid: String,
     },
-    components: {
-      // HelloWorld
-    },
-    data() {
+    data () {
       return {
-        sentences: [],
-        translated: [],
-        text: '',
         activeIndex: -1,
       };
     },
     computed: {
       translation: {
-        get() {
-          return this.$store.state.translations[this.uuid];
-        }
+        get () {
+          let trans = this.$store.state.translations[this.uuid];
+          if (trans) {
+            return JSON.parse(JSON.stringify(trans));
+          } else {
+            return {};
+          }
+        },
       },
     },
     methods: {
-      translate() {
-        console.log(this.uuid);
+      translate () {
         this.translation.translatedSentences = this.translation.originalSentences;
+        this.save();
       },
+      edit (e, i) {
+        this.translation.translatedSentences[i] = e.target.innerText;
+        this.save();
+      },
+      save () {
+        this.$store.commit('addTranslation', {
+          key: this.uuid,
+          value: this.translation,
+        });
+      }
     },
   }
 </script>
@@ -73,11 +78,11 @@
   .main-filed-sentences {
     background: #fff;
     flex-grow: 1;
+    flex-basis: 1px;
     height: 100%;
     margin-right: 40px;
-    border-radius: 12px;
+    border-radius: 8px;
     padding: 12px;
-    /*box-shadow: inset 12px 12px 12px rgba(0, 0, 0, 0.17);*/
   }
   .main-filed-sentences:last-child {
     margin-right: 0;

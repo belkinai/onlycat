@@ -45,9 +45,9 @@ import SimBtn from '@/components/SimBtn.vue';
 import Logo from '@/components/Logo.vue';
 import PanelFooter from '@/components/PanelFooter.vue';
 import CreateTranslation from '@/components/CreateTranslation.vue';
-import CreateTranslationModal from '@/mixins/modals/createTranslationModal';
 import Login from '@/components/Login';
-import { auth } from 'firebase';
+import CreateTranslationModal from '@/mixins/modals/createTranslationModal';
+import { auth } from './firebase';
 
 export default {
   components: {SimPanel, SimContainer, SimSpacer, SimDialog, SimBtn, Logo, PanelFooter, CreateTranslation, Login},
@@ -58,8 +58,7 @@ export default {
     }
   },
   beforeCreate () {
-    this.$store.commit('initializeTranslations');
-    auth().onAuthStateChanged(user => {
+    auth.onAuthStateChanged(user => {
       this.$store.commit('setUser', user);
     });
   },
@@ -72,10 +71,7 @@ export default {
   },
   methods: {
     signOut () {
-      auth().signOut().then(() => {
-            this.$store.commit('unsetStoreTranslations');
-            this.$router.push('/');
-          })
+      auth.signOut().then(() => {this.$router.push('/');})
           .catch(() => {console.log('Sign-Out Error')});
     },
   }
@@ -115,7 +111,7 @@ export default {
     border-radius: 50%;
     line-height: 60px;
     text-align: center;
-    font-size: 40px;
+    font-size: 32px;
     font-weight: 100;
     color: #a859ff;
   }
