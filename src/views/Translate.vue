@@ -14,7 +14,7 @@
               @focusin="activeIndex = i"
               @input="edit($event, i)"
         >
-          {{ sentence }}
+          {{ sentence.text }}
         </span>
       </div>
     </div>
@@ -22,45 +22,59 @@
 </template>
 
 <script>
-  export default {
-    name: 'Translate',
-    props: {
-      uuid: String,
-    },
-    data () {
-      return {
-        activeIndex: -1,
-      };
-    },
-    computed: {
-      translation: {
-        get () {
-          let trans = this.$store.state.translations[this.uuid];
-          if (trans) {
-            return JSON.parse(JSON.stringify(trans));
-          } else {
-            return {};
-          }
-        },
+import { functions } from '../firebase';
+
+export default {
+  name: 'Translate',
+  props: {
+    uuid: String,
+  },
+  data () {
+    return {
+      activeIndex: -1,
+    };
+  },
+  computed: {
+    translation: {
+      get () {
+        let trans = this.$store.state.translations[this.uuid];
+        if (trans) {
+          return JSON.parse(JSON.stringify(trans));
+        } else {
+          return {};
+        }
       },
     },
-    methods: {
-      translate () {
-        this.translation.translatedSentences = this.translation.originalSentences;
-        this.save();
-      },
-      edit (e, i) {
-        this.translation.translatedSentences[i] = e.target.innerText;
-        this.save();
-      },
-      save () {
-        this.$store.commit('addTranslation', {
-          key: this.uuid,
-          value: this.translation,
+  },
+  methods: {
+    translate () {
+      var translate = functions.httpsCallable('translateWatson');
+      translate({sentences: this.translation.originalSentences}).then((result) => {
+        this.translation.translatedSentences = [];
+        result.data.result.translations.forEach((translation) => {
+          // console.log(translation);
+          this.translation.translatedSentences.push({
+            status: 0,
+            text: translation.translation,
+          });
+          this.save();
+          // console.log(this.translation.translatedSentences);
         });
-      }
+      });
+      // this.translation.translatedSentences = this.translation.originalSentences;
     },
-  }
+    edit (e, i) {
+      this.translation.translatedSentences[i].text = e.target.innerText;
+      this.save();
+    },
+    save () {
+      this.$store.commit('addTranslation', {
+        key: this.uuid,
+        value: this.translation,
+      });
+    }
+  },
+}
 </script>
 
 <style>
