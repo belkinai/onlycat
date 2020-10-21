@@ -14,12 +14,14 @@
     color: #334;
     text-shadow: 3px 0 0 #a859ff;
     text-decoration: none;
-    transition: all .15s;
+    transition: all .10s;
   }
   .logo:hover {
-    transform: scale(1.1);
+    transform: translateX(-1px);
+    text-shadow: 5px 0 0 #a859ff;
   }
   .logo:active {
-    transform: scale(0.9);
+    transform: translateX(4px);
+    text-shadow: 0 0 0 #a859ff;
   }
 </style>

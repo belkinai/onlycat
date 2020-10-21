@@ -53,9 +53,9 @@ export default {
     color: #5116dd;
   }
   .translation-list-link:hover {
-    opacity: 0.9;
+    opacity: 0.8;
   }
   .translation-list-link:active {
-    opacity: 0.8;
+    opacity: 0.7;
   }
 </style>

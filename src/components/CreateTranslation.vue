@@ -8,11 +8,11 @@
       <sim-text-area v-model="text" color="#a859ff" label="Текст"/>
     </sim-window-body>
     <sim-window-footer>
-      <sim-btn @click="createTranslationModal = false">Отмена</sim-btn>
+      <sim-btn @click="close">Отмена</sim-btn>
       <sim-spacer/>
       <sim-btn color="#5927b9" dark @click="createTranslation">Добавить</sim-btn>
     </sim-window-footer>
-    <div class="modal-close" @click="createTranslationModal = false">&#9711;</div>
+    <div class="modal-close" @click="close">&#9711;</div>
   </sim-window>
 </template>
 
@@ -25,12 +25,13 @@ import SimWindowFooter from '@/components/SimWindowFooter.vue';
 import SimSpacer from '@/components/SimSpacer.vue';
 import SimTextField from '@/components/SimTextField.vue';
 import SimTextArea from '@/components/SimTextArea.vue';
-import CreateTranslationModal from '@/mixins/modals/createTranslationModal.js';
 
 export default {
+  props: {
+    modelValue: Boolean,
+  },
   components: { SimBtn, SimWindow, SimWindowHeader, SimWindowBody, SimWindowFooter, SimTextField, SimTextArea,
     SimSpacer },
-  mixins: [CreateTranslationModal],
   data() {
     return {
       text: '',
@@ -40,17 +41,24 @@ export default {
   methods: {
     createTranslation() {
       let originalSentences = this.text.match( /[^.!?]+[.!?]+["']?|\s*$/g );
-      const uuid = () => ([1e7]+-1e3+-4e3+-8e3+-1e11)
-              .replace(/[018]/g,c=>(c^crypto.getRandomValues(new Uint8Array(1))[0]&15 >> c/4).toString(16));
+      const id = () => ([1e7]+-1e3+-4e3+-8e3+-1e11)
+          .replace(/[018]/g,c=>(c^crypto.getRandomValues(new Uint8Array(1))[0]&15 >> c/4).toString(16));
       this.$store.commit('addTranslation', {
-        key: uuid(),
+        key: id(),
         value: {
           name: this.name,
+          text: this.text,
           originalSentences: originalSentences,
           translatedSentences: [],
+          fromLang: 'en',
+          toLang: 'ru',
+          complete: false,
         }
       });
-      this.createTranslationModal = false;
+      this.close();
+    },
+    close () {
+      this.$emit('update:modelValue', false);
     },
   },
 }

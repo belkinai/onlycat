@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <sim-dialog v-model="createTranslationModal" modal>
-      <create-translation/>
+      <create-translation v-model="createTranslationModal"/>
     </sim-dialog>
     <sim-dialog v-model="loginModal">
       <login/>
@@ -26,12 +26,14 @@
           <span class="sim-profile-caption__button" @click="loginModal = true">Войти</span>
         </div>
       </div>
-      <sim-btn block lg @click="createTranslationModal = true">Новый перевод</sim-btn>
+      <sim-btn block @click="createTranslationModal = true">Новый перевод</sim-btn>
       <sim-spacer/>
       <panel-footer/>
     </sim-panel>
     <sim-container>
+      <transition name="slide-right">
       <router-view/>
+      </transition>
     </sim-container>
   </div>
 </template>

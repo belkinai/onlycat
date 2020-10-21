@@ -1,7 +1,25 @@
 <template>
-  <div v-if="translation" class="home">
-    <h1><router-link :to="{name: 'Home'}">&larr;</router-link>{{ translation.name }}</h1>
-    <button @click="translate">Translate</button>
+  <div v-if="translation" class="translate">
+    <div class="page-header">
+      <h1><router-link :to="{name: 'Home'}">&larr;</router-link>{{ translation.name }}</h1>
+    </div>
+    <div class="translate-controls">
+      <div class="translate-controls__start">
+        <sim-btn>Изменить оригинал</sim-btn>
+      </div>
+      <div class="translate-controls__center">
+        <div class="translate-controls__lang">
+          EN
+        </div>
+        <sim-btn @click="translate">Перевести</sim-btn>
+        <div class="translate-controls__lang">
+          RU
+        </div>
+      </div>
+      <div class="translate-controls__end">
+        <sim-btn>Забрать результат</sim-btn>
+      </div>
+    </div>
     <div class="main-fields">
       <div class="main-filed-sentences">
         <span  class="main-filed-sentence" style="white-space: pre-line" v-for="(sentence, j) in translation.originalSentences" :key="j"
@@ -23,9 +41,11 @@
 
 <script>
 import { functions } from '../firebase';
+import SimBtn from "../components/SimBtn";
 
 export default {
   name: 'Translate',
+  components: {SimBtn},
   props: {
     uuid: String,
   },
@@ -37,9 +57,9 @@ export default {
   computed: {
     translation: {
       get () {
-        let trans = this.$store.state.translations[this.uuid];
-        if (trans) {
-          return JSON.parse(JSON.stringify(trans));
+        let translation = this.$store.state.translations[this.uuid];
+        if (translation) {
+          return JSON.parse(JSON.stringify(translation));
         } else {
           return {};
         }
@@ -52,16 +72,13 @@ export default {
       translate({sentences: this.translation.originalSentences}).then((result) => {
         this.translation.translatedSentences = [];
         result.data.result.translations.forEach((translation) => {
-          // console.log(translation);
           this.translation.translatedSentences.push({
             status: 0,
             text: translation.translation,
           });
           this.save();
-          // console.log(this.translation.translatedSentences);
         });
       });
-      // this.translation.translatedSentences = this.translation.originalSentences;
     },
     edit (e, i) {
       this.translation.translatedSentences[i].text = e.target.innerText;
@@ -74,29 +91,64 @@ export default {
       });
     }
   },
+
 }
 </script>
 
 <style>
-  .home {
+  .translate {
     display: flex;
     flex-direction: column;
     height: 100%;
-    min-height: 100%;
+    width: 1300px;
+    max-width: 100%;
+  }
+  .translate-controls {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+  .translate-controls__start {
+    display: flex;
+    flex-grow: 1;
+    justify-content: flex-start;
+    padding: 0 12px;
+  }
+  .translate-controls__center {
+    display: flex;
+    justify-content: center;
+  }
+  .translate-controls__end {
+    display: flex;
+    flex-grow: 1;
+    justify-content: flex-end;
+    padding: 0 12px;
+  }
+  .translate-controls__lang {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 40px;
+    padding: 0 12px;
+    font-size: 19px;
+    font-weight: 100;
+    text-transform: uppercase;
   }
   .main-fields {
     display: flex;
     flex-direction: row;
-    height: 100%;
+    flex-grow: 1;
+    overflow: hidden;
   }
   .main-filed-sentences {
-    background: #fff;
+    overflow: auto;
     flex-grow: 1;
     flex-basis: 1px;
-    height: 100%;
-    margin-right: 40px;
-    border-radius: 8px;
+    margin-right: 24px;
     padding: 12px;
+    border-radius: 2px;
+    background: #fff;
   }
   .main-filed-sentences:last-child {
     margin-right: 0;
