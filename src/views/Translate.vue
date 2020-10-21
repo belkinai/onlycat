@@ -1,7 +1,7 @@
 <template>
   <div v-if="translation" class="translate">
     <div class="page-header">
-      <h1><router-link :to="{name: 'Home'}">&larr;</router-link>{{ translation.name }}</h1>
+      <h1><router-link :to="{name: 'Home'}">&#x25c1;</router-link>{{ translation.name }}</h1>
     </div>
     <div class="translate-controls">
       <div class="translate-controls__start">
@@ -30,7 +30,7 @@
               contenteditable
               :class="{active: i === activeIndex}"
               @focusin="activeIndex = i"
-              @input="edit($event, i)"
+              @focusout="edit($event, i)"
         >
           {{ sentence.text }}
         </span>
@@ -69,7 +69,12 @@ export default {
   methods: {
     translate () {
       var translate = functions.httpsCallable('translateWatson');
-      translate({sentences: this.translation.originalSentences}).then((result) => {
+      const translationData = {
+        sentences: this.translation.originalSentences,
+        modelId: this.translation.fromLang + '-' + this.translation.toLang,
+      };
+      console.log(translationData);
+      translate(translationData).then((result) => {
         this.translation.translatedSentences = [];
         result.data.result.translations.forEach((translation) => {
           this.translation.translatedSentences.push({
@@ -107,13 +112,13 @@ export default {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    margin-bottom: 12px;
+    margin-bottom: 24px;
   }
   .translate-controls__start {
     display: flex;
     flex-grow: 1;
+    flex-basis: 1px;
     justify-content: flex-start;
-    padding: 0 12px;
   }
   .translate-controls__center {
     display: flex;
@@ -122,8 +127,8 @@ export default {
   .translate-controls__end {
     display: flex;
     flex-grow: 1;
+    flex-basis: 1px;
     justify-content: flex-end;
-    padding: 0 12px;
   }
   .translate-controls__lang {
     display: flex;

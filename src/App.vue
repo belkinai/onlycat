@@ -84,6 +84,8 @@ export default {
   .page {
     display: flex;
     flex-direction: row;
+    max-width: 100%;
+    overflow: hidden;
     height: 100%;
     min-height: 100%;
     background-color: #f5f9fd;
