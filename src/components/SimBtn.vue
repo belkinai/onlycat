@@ -61,4 +61,7 @@
   .sim-btn_dark {
     color: rgba(255, 255, 255, 0.92);
   }
+  .sim-btn .lni {
+    margin: -2px 12px 0 0;
+  }
 </style>

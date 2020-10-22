@@ -26,7 +26,13 @@
           <span class="sim-profile-caption__button" @click="loginModal = true">Войти</span>
         </div>
       </div>
-      <sim-btn block @click="createTranslationModal = true">Новый перевод</sim-btn>
+      <sim-btn block @click="createTranslationModal = true">
+        <sim-icon :class="'lni-plus'" size="16px"/>
+        Новый перевод
+      </sim-btn>
+      <nav>
+        <menu-item>Menu</menu-item>
+      </nav>
       <sim-spacer/>
       <panel-footer/>
     </sim-panel>
@@ -44,15 +50,17 @@ import SimContainer from '@/components/SimContainer.vue';
 import SimSpacer from '@/components/SimSpacer.vue';
 import SimDialog from '@/components/SimDialog.vue';
 import SimBtn from '@/components/SimBtn.vue';
+import SimIcon from "@/components/SimIcon";
 import Logo from '@/components/Logo.vue';
 import PanelFooter from '@/components/PanelFooter.vue';
 import CreateTranslation from '@/components/CreateTranslation.vue';
 import Login from '@/components/Login';
+import MenuItem from '@/components/MenuItem.vue';
 import CreateTranslationModal from '@/mixins/modals/createTranslationModal';
 import { auth } from './firebase';
 
 export default {
-  components: {SimPanel, SimContainer, SimSpacer, SimDialog, SimBtn, Logo, PanelFooter, CreateTranslation, Login},
+  components: {SimPanel, SimContainer, SimSpacer, SimDialog, SimBtn, SimIcon, Logo, PanelFooter, CreateTranslation, Login, MenuItem},
   mixins: [CreateTranslationModal],
   data() {
     return {
