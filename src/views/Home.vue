@@ -1,6 +1,8 @@
 <template>
   <div class="home">
-    <h1>Ваши переводы</h1>
+    <div class="page-header">
+      <h1>Ваши переводы</h1>
+    </div>
     <div class="translation-list">
       <div v-for="(translation, i) in translations" :key="i" class="translation-list-item">
         <router-link :to="{name: 'Translate', params: {uuid: i}}"
@@ -39,6 +41,9 @@ export default {
   .translation-list {
     border-radius: 4px;
     background: #fff;
+  }
+  .dark .translation-list {
+    background: #272a3b;
   }
   .translation-list-item {
     display: flex;

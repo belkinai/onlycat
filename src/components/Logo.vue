@@ -16,6 +16,9 @@
     text-decoration: none;
     transition: all .10s;
   }
+  .dark .logo {
+    color: #9be;
+  }
   .logo:hover {
     transform: translateX(-1px);
     text-shadow: 5px 0 0 #a859ff;

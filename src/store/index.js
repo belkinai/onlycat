@@ -7,6 +7,7 @@ export default createStore({
     translations: {},
     createTranslationModal: false,
     user: {},
+    darkMode: false,
   },
   mutations: {
     addTranslation (state, data) {
@@ -48,6 +49,9 @@ export default createStore({
     setCreateTranslationModal (state, value) {
       state.createTranslationModal = value;
     },
+    setDarkMode (state, value) {
+      state.darkMode = value;
+    }
   },
   actions: {
   },

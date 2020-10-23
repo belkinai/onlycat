@@ -12,13 +12,12 @@
   align-items: center;
   height: 100%;
   padding: 40px 32px;
-  background: #e0e4ea;
   background: #fff;
-  /*background: linear-gradient(-30deg, #311a99 20%, #4a39bb 80%, #5543f0 100%);*/
   color: #35393d;
-  /*box-shadow: 2px 0 8px rgba(0, 0, 0, 0.27);*/
+  transition: all 0.1s ease-in-out;
 }
 .dark .sim-panel {
-  background: #1a161c;
+  background: #272a3b;
+  color: #aac;
 }
 </style>

@@ -16,6 +16,9 @@
     font-size: 12px;
     color: #334;
   }
+  .dark .panel-footer {
+    color: #88a;
+  }
   .panel-footer__caption {
     margin: 10px 0;
   }

@@ -1,7 +1,12 @@
 <template>
   <div v-if="translation" class="translate">
     <div class="page-header">
-      <h1><router-link :to="{name: 'Home'}">&#x25c1;</router-link>{{ translation.name }}</h1>
+      <router-link :to="{name: 'Home'}">
+        <sim-icon :class="['lni-chevron-left', 'mr-5']" size="28px" color="#446"/>
+      </router-link>
+      <h1>
+        {{ translation.name }}
+      </h1>
     </div>
     <div class="translate-controls">
       <div class="translate-controls__start">
@@ -42,10 +47,11 @@
 <script>
 import { functions } from '../firebase';
 import SimBtn from "../components/SimBtn";
+import SimIcon from "../components/SimIcon";
 
 export default {
   name: 'Translate',
-  components: {SimBtn},
+  components: {SimBtn, SimIcon},
   props: {
     uuid: String,
   },

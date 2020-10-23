@@ -23,15 +23,19 @@ body, html, .app {
 .page h1 {
   font-weight: 100;
   font-size: 36px;
-  margin: 12px 0 30px;
+  padding: 0;
+  margin: 0;
 }
-.page h1 a {
+
+.page-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 12px 0 30px;
+}
+
+.mr-5 {
   margin-right: 20px;
-  text-decoration: none;
-  color: #5116dd;
-}
-.page h1 a:hover {
-  opacity: 0.8;
 }
 
 /*Transitions*/
