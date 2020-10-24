@@ -11,7 +11,6 @@ export default createStore({
   },
   mutations: {
     addTranslation (state, data) {
-      console.log(data);
       state.translations[data.key] = data.value;
       if (fb.auth.currentUser) {
         fb.translationsCollection.doc(data.key).set({
@@ -53,6 +52,13 @@ export default createStore({
     },
     setDarkMode (state, value) {
       state.darkMode = value;
+      window.localStorage.setItem('darkMode', JSON.stringify(value));
+    },
+    initializeDarkMode (state) {
+      let darkModeString = window.localStorage.getItem('darkMode');
+      if (darkModeString) {
+        state.darkMode = JSON.parse(darkModeString);
+      }
     }
   },
   actions: {

@@ -3,6 +3,7 @@
     <div class="sim-text-field__wrap" :class="{focus: focus}">
       <input :id="uuid"
              class="sim-text-field__input" type="text"
+             :value="modelValue"
              @input="$emit('update:modelValue', $event.target.value)"
              @focusIn="focus = true"
              @focusOut="focus = false"

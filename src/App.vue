@@ -87,6 +87,7 @@ export default {
     auth.onAuthStateChanged(user => {
       this.$store.commit('setUser', user);
     });
+    this.$store.commit('initializeDarkMode');
   },
   computed: {
     user: {

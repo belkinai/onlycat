@@ -24,7 +24,7 @@
     text-shadow: 5px 0 0 #a859ff;
   }
   .logo:active {
-    transform: translateX(4px);
-    text-shadow: 0 0 0 #a859ff;
+    transform: translateX(-2px);
+    text-shadow: 7px 0 0 #a859ff;
   }
 </style>

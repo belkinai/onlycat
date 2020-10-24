@@ -1,5 +1,8 @@
 <template>
   <div v-if="translation" class="translate">
+    <sim-dialog v-model="editTranslationModal" modal>
+      <create-translation v-model="editTranslationModal" :translation="translation" :uuid="uuid"/>
+    </sim-dialog>
     <div class="page-header">
       <router-link :to="{name: 'Home'}">
         <sim-icon :class="['lni-chevron-left', 'mr-5']" size="28px"
@@ -28,12 +31,15 @@
         Подсветка: <span class="sentence_not-ready">сырой текст</span>,
         <span class="sentence active">фокус на сыром тексте</span>,
         <span>готовый текст</span>,
-        <span class="sentence_ready active">фокус на готовом тексте</span>
+        <span class="sentence_ready active">фокус на готовом тексте</span>.
+        Пометьте фрагмент, как готовый, нажав [CTRL+ENTER]
       </span>
     </div>
     <div class="translate-controls">
       <div class="translate-controls__start">
-        <sim-btn icon title="Редактировать оригинал"><sim-icon :class="'lni-pencil-alt'" size="16px"/></sim-btn>
+        <sim-btn icon title="Редактировать оригинал" @click="editTranslationModal = true">
+          <sim-icon :class="'lni-pencil-alt'" size="16px"/>
+        </sim-btn>
       </div>
       <div class="translate-controls__center">
         <div class="translate-controls__lang">
@@ -48,7 +54,7 @@
         <sim-btn icon><sim-icon :class="'lni-download'" size="16px"/></sim-btn>
       </div>
     </div>
-    <div class="translate-container">
+    <div id="translation-original" class="translate-container">
       <div class="translate-sentences">
         <span v-for="(sentence, j) in translation.originalSentences" :key="j"
               class="sentence"
@@ -82,13 +88,15 @@
 import { functions } from '../firebase';
 import SimBtn from '../components/SimBtn';
 import SimIcon from '../components/SimIcon';
+import SimDialog from '../components/SimDialog';
+import CreateTranslation from '../components/CreateTranslation';
 import darkMode from '@/mixins/darkMode';
 import PrettyDate from '../filters/prettyDate';
 import Plural from '../filters/plural';
 
 export default {
   name: 'Translate',
-  components: {SimBtn, SimIcon},
+  components: {SimBtn, SimIcon, SimDialog, CreateTranslation},
   mixins: [darkMode],
   props: {
     uuid: String,
@@ -98,6 +106,7 @@ export default {
       activeIndex: -1,
       loading: false,
       translating: false,
+      editTranslationModal: false,
     };
   },
   computed: {
@@ -183,7 +192,7 @@ export default {
       sentence.status = 1;
       this.countReadySentences();
       this.save();
-    }
+    },
   },
 
 }
@@ -218,7 +227,7 @@ export default {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    margin-bottom: 24px;
+    margin-bottom: 16px;
   }
   .translate-controls__start {
     display: flex;

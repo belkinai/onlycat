@@ -10,7 +10,7 @@
     <sim-window-footer>
       <sim-btn @click="close">Отмена</sim-btn>
       <sim-spacer/>
-      <sim-btn color="#5927b9" dark @click="createTranslation">Добавить</sim-btn>
+      <sim-btn color="#5927b9" dark @click="createTranslation">{{ callToAction }}</sim-btn>
     </sim-window-footer>
     <div class="modal-close" @click="close">&#9711;</div>
   </sim-window>
@@ -28,7 +28,9 @@ import SimTextArea from '@/components/SimTextArea.vue';
 
 export default {
   props: {
-    modelValue: Boolean,
+    modelValue:  Boolean,
+    translation: Object,
+    uuid:        String,
   },
   components: { SimBtn, SimWindow, SimWindowHeader, SimWindowBody, SimWindowFooter, SimTextField, SimTextArea,
     SimSpacer },
@@ -36,14 +38,22 @@ export default {
     return {
       text: '',
       name: '',
+      callToAction: 'Добавить',
     };
+  },
+  created() {
+    if (this.translation) {
+      this.text = this.translation.text;
+      this.name = this.translation.name;
+      this.callToAction = 'Сохранить';
+    }
   },
   methods: {
     createTranslation() {
       let originalSentences = this.text.match( /[^.!?]+[.!?]+["']?|\s*$/g );
       const id = () => ([1e7]+-1e3+-4e3+-8e3+-1e11)
           .replace(/[018]/g,c=>(c^crypto.getRandomValues(new Uint8Array(1))[0]&15 >> c/4).toString(16));
-      const uuid = id();
+      const uuid = this.uuid ? this.uuid : id();
       this.$store.dispatch('saveTranslation', {
         key: uuid,
         value: {

@@ -35,7 +35,7 @@ export default {
     flex-direction: column;
     height: 100%;
     min-height: 100%;
-    width: 960px;
+    width: 1300px;
     max-width: 100%;
   }
   .translation-list {
