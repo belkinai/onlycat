@@ -43,8 +43,9 @@ export default {
       let originalSentences = this.text.match( /[^.!?]+[.!?]+["']?|\s*$/g );
       const id = () => ([1e7]+-1e3+-4e3+-8e3+-1e11)
           .replace(/[018]/g,c=>(c^crypto.getRandomValues(new Uint8Array(1))[0]&15 >> c/4).toString(16));
-      this.$store.commit('addTranslation', {
-        key: id(),
+      const uuid = id();
+      this.$store.dispatch('saveTranslation', {
+        key: uuid,
         value: {
           name: this.name,
           text: this.text,
@@ -53,9 +54,14 @@ export default {
           fromLang: 'en',
           toLang: 'ru',
           complete: false,
+          updatedAt: Date.now(),
+          wordsCount: 0,
+          readyWordsCount: 0,
         }
+      }).then(() => {
+        this.close();
+        this.$router.push({name: 'Translate', params: {uuid: uuid}});
       });
-      this.close();
     },
     close () {
       this.$emit('update:modelValue', false);

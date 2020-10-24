@@ -11,11 +11,13 @@ export default createStore({
   },
   mutations: {
     addTranslation (state, data) {
+      console.log(data);
       state.translations[data.key] = data.value;
       if (fb.auth.currentUser) {
         fb.translationsCollection.doc(data.key).set({
           translation: JSON.stringify(data.value),
           userId: fb.auth.currentUser.uid,
+          updatedAt: Date.now(),
         });
       } else {
         window.localStorage.setItem('translations', JSON.stringify(state.translations));
@@ -54,6 +56,12 @@ export default createStore({
     }
   },
   actions: {
+    saveTranslation ({commit}, data) {
+      return new Promise(resolve => {
+        commit('addTranslation', data);
+        resolve(true);
+      });
+    },
   },
   modules: {
   },
