@@ -2,7 +2,8 @@
   <div v-if="translation" class="translate">
     <div class="page-header">
       <router-link :to="{name: 'Home'}">
-        <sim-icon :class="['lni-chevron-left', 'mr-5']" size="28px" color="#446"/>
+        <sim-icon :class="['lni-chevron-left', 'mr-5']" size="28px"
+                  :color="darkMode? '#446' : '#88e'"/>
       </router-link>
       <h1>
         {{ translation.name }}
@@ -160,6 +161,10 @@ export default {
     padding: 12px;
     border-radius: 2px;
     background: #fff;
+  }
+  .dark .main-filed-sentences {
+    background: #272a3b;
+    color: #ddf
   }
   .main-filed-sentences:last-child {
     margin-right: 0;

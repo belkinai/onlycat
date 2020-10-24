@@ -134,7 +134,6 @@ export default {
     height: 70px;
     padding: 4px;
     border-radius: 50%;
-    /*border: 1px solid #a859ff;*/
     box-shadow: inset 0 0 0 2px #a859ff;
   }
   .sim-profile-avatar__img {
@@ -167,8 +166,8 @@ export default {
     cursor: pointer;
   }
   .dark .sim-profile-caption__button {
-    color: #bcbbff;
-    border-bottom: 1px dashed #bcbbff;
+    color: #88e;
+    border-bottom: 1px dashed #88e;
   }
   .sim-profile-caption__button:hover {
     opacity: 0.9;

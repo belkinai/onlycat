@@ -78,14 +78,25 @@ export default {
     cursor: pointer;
     transition: all .2s;
   }
+  .dark .modal-close {
+    color: rgba(255, 255, 255, 0.72);
+  }
   .modal-close:hover {
     color: rgba(0, 0, 0, 1);
     text-shadow: 0 0 4px rgba(60, 100, 255, 0.2);
     transform: scale(1.2);
   }
+  .dark .modal-close:hover {
+    color: rgba(255, 255, 255, 1);
+    text-shadow: 0 0 4px rgba(160, 200, 255, 0.2);
+  }
   .modal-close:active {
     color: rgba(0, 0, 0, 1);
     text-shadow: 0 0 2px rgba(60, 100, 255, 0.2);
     transform: scale(1.1);
+  }
+  .dark .modal-close:active {
+    color: rgba(255, 255, 255, 1);
+    text-shadow: 0 0 2px rgba(160, 200, 255, 0.2);
   }
 </style>

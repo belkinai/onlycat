@@ -71,6 +71,9 @@
     height: 1px;
     background: #605c79;
   }
+  .dark .sim-text-field__underline {
+    background: #908ca9;
+  }
   .sim-text-field__underline_focus {
     position: absolute;
     bottom: 0;
@@ -94,6 +97,9 @@
     color: rgba(0, 0, 0, 0.87);
     background: transparent;
   }
+  .dark .sim-text-field__input {
+    color: rgba(255, 255, 255, 0.87);
+  }
   .sim-text-field__label {
     position: absolute;
     left: 0;
@@ -101,6 +107,9 @@
     transition: all .2s;
     color: #aaa;
     cursor: text;
+  }
+  .dark .sim-text-field__label {
+    color: #706595;
   }
   .sim-text-field__label.focus {
     top: -8px;

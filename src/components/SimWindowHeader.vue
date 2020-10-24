@@ -15,4 +15,7 @@
     font-weight: 300;
     color: rgba(0, 0, 0, 0.92);
   }
+  .dark .sim-window__header {
+    color: #ddf;
+  }
 </style>

@@ -1,10 +1,18 @@
 <template>
-  <div class="dark-mode-switch">
-    <sim-icon :class="'lni-sun'" size="24px" :color="darkMode ? '#446' : '#daad65'"/>
-    <div class="dark-mode-switch__control" @click="darkMode = !darkMode">
-      <div class="dark-mode-switch__handler"></div>
+  <div class="dark-mode-switch" @click="darkMode = !darkMode">
+    <sim-icon :class="'lni-sun'"
+              size="24px"
+              :color="darkMode ? '#446' : '#daad65'"
+              :glow="!darkMode"
+    />
+    <div class="dark-mode-switch__control">
+      <div class="dark-mode-switch__handler" :class="{dark: darkMode}"></div>
     </div>
-    <sim-icon :class="'lni-night'" size="20px" :color="darkMode ? '#5116dd' : '#aac'" :glow="darkMode"/>
+    <sim-icon :class="'lni-night'"
+              size="20px"
+              :color="darkMode ? '#5116dd' : '#aac'"
+              :glow="darkMode"
+    />
   </div>
 </template>
 
@@ -23,20 +31,31 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    width: 120px;
+    padding-right: 8px;
+    cursor: pointer;
   }
   .dark-mode-switch__control {
+    position: relative;
     display: flex;
     align-items: center;
-    width: 84px;
+    width: 32px;
     height: 40px;
-    margin: 0 32px;
+    margin: 0 12px;
     content: '';
   }
   .dark-mode-switch__handler {
     content: '';
-    width: 16px;
-    height: 16px;
-    background: #a859ff;
+    position: absolute;
+    left: 0;
+    width: 8px;
+    height: 8px;
+    border-radius: 4px;
+    background: #daad65;
+    transition: all 0.1s ease-in-out;
+  }
+  .dark-mode-switch__handler.dark {
+    left: 24px;
+    background: #5116dd;
   }
 </style>

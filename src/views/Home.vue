@@ -57,6 +57,9 @@ export default {
     font-weight: 300;
     color: #5116dd;
   }
+  .dark .translation-list-link {
+    color: #88e;
+  }
   .translation-list-link:hover {
     opacity: 0.8;
   }

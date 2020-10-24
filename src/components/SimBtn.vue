@@ -28,14 +28,18 @@
     position: relative;
     align-items: center;
     justify-content: center;
-    padding: 0 24px;
     height: 40px;
+    padding: 2px 24px 0;
     border-radius: 4px;
     border: none;
     outline: none;
     background: #e0e4ea;
     text-transform: uppercase;
     transition: all .1s linear;
+  }
+  .dark .sim-btn {
+    background: #5a548a;
+    color: #ddf;
   }
   .sim-btn:before {
     position: absolute;

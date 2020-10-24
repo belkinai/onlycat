@@ -19,8 +19,8 @@
     align-items: center;
     justify-content: flex-start;
     padding: 0 24px;
+    width: 100%;
     height: 48px;
-    /*border-radius: 4px;*/
     border: none;
     outline: none;
     color: #446;
@@ -45,14 +45,26 @@
   .menu-item.active {
     color: #5116dd;
   }
+  .dark .menu-item.active {
+    color: #a186fd;
+  }
   .menu-item.active:before {
     background: rgba(15, 45, 110, 0.15);
+  }
+  .dark .menu-item.active:before {
+    background: rgba(115, 135, 210, 0.15);
   }
   .menu-item:hover:before {
     background: rgba(15, 45, 110, 0.10);
   }
+  .dark .menu-item:hover:before {
+    background: rgba(115, 135, 210, 0.10);
+  }
   .menu-item:active:before {
     background: rgba(15, 45, 110, 0.2);
+  }
+  .dark .menu-item:active:before {
+    background: rgba(115, 135, 210, 0.2);
   }
   .menu-item .lni {
     margin: -2px 12px 0 0;
