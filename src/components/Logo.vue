@@ -1,6 +1,6 @@
 <template>
   <router-link :to="{name: 'Home'}" class="logo">
-    SIMCAT
+    ONLYCAT
   </router-link>
 </template>
 
