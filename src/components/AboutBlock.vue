@@ -4,19 +4,20 @@
       <div class="part-text">
         <h2>Переводить - просто</h2>
         <p>
-          ONLYCAT - это простой CAT-инструмент для преводчика-одиночки. <br>CAT tool (Computer-assisted translation tool) – это комплексное решение для переводчиков и компаний, которые занимаются профессиональными переводами. Пероочередная задача CAT инструмента – сократить время на перевод документа за счет машинного перевода, и предоставить удобный редактор.
+          ONLYCAT - это простой CAT-инструмент для преводчика-одиночки. <br>CAT tool (Computer-assisted translation
+          tool) – это комплексное решение для переводчиков и компаний, которые занимаются профессиональными переводами. Перовочередная задача CAT инструмента – сократить время на перевод документа за счет машинного перевода, и предоставить удобный редактор.
         </p>
         <p>
           Разработчик данного сервиса занимается переводами в качестве хобби. Этим обусловлен минималистичный набор функций. Можно загрузить текст, автоматический перевести, отредактировать и выгрузить результат.
         </p>
       </div>
       <div class="part-illustration">
-        <img class="about-block__illustration" src="@/assets/typewriters.png" alt="">
+        <img class="about-block__illustration" src="@/assets/cat.png" alt="">
       </div>
     </div>
     <div class="about-part">
       <div class="part-illustration">
-        <img class="about-block__illustration" src="@/assets/typewriters.png" alt="">
+        <img class="about-block__illustration" src="@/assets/typewriters2.png" alt="">
       </div>
       <div class="part-text">
         <h2>Концентрация на тексте</h2>
@@ -30,7 +31,12 @@
 
 <style>
   .about-block {
-    width: 980px;
+    width: 1300px;
+    max-width: 100%;
+    overflow: auto;
+    margin: 24px 0 0 0;
+    padding: 24px;
+    border-radius: 12px;
   }
   .about-block__illustration {
     float: right;

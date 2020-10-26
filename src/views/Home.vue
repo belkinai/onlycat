@@ -3,7 +3,7 @@
     <div class="page-header">
       <h1>Ваши переводы</h1>
     </div>
-    <div v-if="translations.length" class="translation-list">
+    <div v-if="translations" class="translation-list">
       <div v-for="(translation, i) in translations" :key="i" class="translation-list-item">
         <router-link :to="{name: 'Translate', params: {uuid: i}}"
                      class="translation-list-link"
@@ -12,10 +12,12 @@
         </router-link>
       </div>
     </div>
-    <div v-else>
-      У вас еще нет переводов.
+    <div v-else class="translation-list">
+      <div class="translation-list-item">
+        У вас еще нет переводов.
+      </div>
     </div>
-    <about-block v-if="!translations.length"/>
+    <about-block v-if="!translations"/>
   </div>
 </template>
 
@@ -46,7 +48,9 @@ export default {
   }
   .translation-list {
     border-radius: 4px;
+    padding: 8px 0;
     background: #fff;
+    overflow: auto;
   }
   .dark .translation-list {
     background: #272a3b;
