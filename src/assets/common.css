@@ -31,6 +31,9 @@ body, html, .app {
   font-size: 48px;
   margin: 0;
 }
+.page p {
+  line-height: 1.5rem;
+}
 
 .page-header {
   display: flex;

@@ -3,7 +3,7 @@
     <div class="page-header">
       <h1>Ваши переводы</h1>
     </div>
-    <div class="translation-list">
+    <div v-if="translations.length" class="translation-list">
       <div v-for="(translation, i) in translations" :key="i" class="translation-list-item">
         <router-link :to="{name: 'Translate', params: {uuid: i}}"
                      class="translation-list-link"
@@ -12,13 +12,19 @@
         </router-link>
       </div>
     </div>
+    <div v-else>
+      У вас еще нет переводов.
+    </div>
+    <about-block v-if="!translations.length"/>
   </div>
 </template>
 
 <script>
+import AboutBlock from '@/components/AboutBlock.vue';
 
 export default {
   name: 'Home',
+  components: {AboutBlock},
   computed: {
     translations: {
       get() {

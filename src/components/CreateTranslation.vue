@@ -25,6 +25,7 @@ import SimWindowFooter from '@/components/SimWindowFooter.vue';
 import SimSpacer from '@/components/SimSpacer.vue';
 import SimTextField from '@/components/SimTextField.vue';
 import SimTextArea from '@/components/SimTextArea.vue';
+import tokenizer from 'sbd';
 
 export default {
   props: {
@@ -50,7 +51,8 @@ export default {
   },
   methods: {
     createTranslation() {
-      let originalSentences = this.text.match( /[^.!?]+[.!?]+["']?|\s*$/g );
+      // let originalSentences = this.text.match( /[^.!?]+[.!?]+["']?|\s*$/g );
+      let originalSentences = tokenizer.sentences(this.text, {preserve_whitespace: true});
       const id = () => ([1e7]+-1e3+-4e3+-8e3+-1e11)
           .replace(/[018]/g,c=>(c^crypto.getRandomValues(new Uint8Array(1))[0]&15 >> c/4).toString(16));
       const uuid = this.uuid ? this.uuid : id();

@@ -1,5 +1,8 @@
 <template>
   <div v-if="translation" class="translate">
+    <vue-headful
+            :title="translation.name + ' - ONLYCAT'"
+    />
     <sim-dialog v-model="editTranslationModal" modal>
       <create-translation v-model="editTranslationModal" :translation="translation" :uuid="uuid"/>
     </sim-dialog>
@@ -194,7 +197,6 @@ export default {
       this.save();
     },
   },
-
 }
 </script>
 

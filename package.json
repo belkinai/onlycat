@@ -1,5 +1,5 @@
 {
-  "name": "simcat",
+  "name": "onlycat",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -12,7 +12,9 @@
     "firebase": "^7.23.0",
     "firebaseui": "^4.6.1",
     "normalize.css": "^8.0.1",
+    "sbd": "^1.0.18",
     "vue": "^3.0.0-0",
+    "vue-headful": "^2.1.0",
     "vue-router": "^4.0.0-0",
     "vuex": "^4.0.0-0"
   },
