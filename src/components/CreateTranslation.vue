@@ -6,6 +6,20 @@
     <sim-window-body>
       <sim-text-field v-model="name" color="#a859ff" label="Название"/>
       <sim-text-area v-model="text" color="#a859ff" label="Текст"/>
+      <div v-cloak
+           @drop.prevent="addDropFile"
+           @dragover.prevent
+      >
+        <div>
+          <input id="realty-form-images" hidden type="file" multiple @change="selectFiles"/>
+          <span>
+                  Перетащите сюда фотографии, или
+                  <label for="realty-form-images">
+                    <span class="pseudo-link">нажмите сюда, чтобы выбрать на компьютере</span>
+                  </label>
+                </span>
+        </div>
+      </div>
     </sim-window-body>
     <sim-window-footer>
       <sim-btn @click="close">Отмена</sim-btn>
@@ -26,6 +40,7 @@ import SimSpacer from '@/components/SimSpacer.vue';
 import SimTextField from '@/components/SimTextField.vue';
 import SimTextArea from '@/components/SimTextArea.vue';
 import tokenizer from 'sbd';
+import mammoth from 'mammoth';
 
 export default {
   props: {
@@ -40,9 +55,16 @@ export default {
       text: '',
       name: '',
       callToAction: 'Добавить',
+      files: [],
     };
   },
   created() {
+    mammoth.extractRawText({path: "path/to/document.docx"})
+      .then(function(result){
+        console.log(result.value);
+        console.log(result.messages);
+      })
+      .done();
     if (this.translation) {
       this.text = this.translation.text;
       this.name = this.translation.name;
@@ -77,6 +99,13 @@ export default {
     },
     close () {
       this.$emit('update:modelValue', false);
+    },
+    addDropFile(e) {
+      this.files = Array.from(e.dataTransfer.files);
+    },
+    selectFiles(event) {
+      this.files = event.target.files;
+      console.log(this.files);
     },
   },
 }

@@ -11,6 +11,7 @@
     "core-js": "^3.6.5",
     "firebase": "^7.23.0",
     "firebaseui": "^4.6.1",
+    "mammoth": "^1.4.13",
     "normalize.css": "^8.0.1",
     "sbd": "^1.0.18",
     "vue": "^3.0.0-0",

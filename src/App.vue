@@ -1,5 +1,5 @@
 <template>
-  <div class="page" :class="{dark: darkMode}">
+  <div class="page" :class="{dark: darkMode, 'app-page': appPage}">
     <sim-dialog v-model="createTranslationModal" modal>
       <create-translation v-model="createTranslationModal"/>
     </sim-dialog>
@@ -46,7 +46,7 @@
       <sim-spacer/>
       <panel-footer/>
     </sim-panel>
-    <sim-container>
+    <sim-container :class="{'app-page': appPage}">
         <router-view v-slot="{ Component }">
           <transition name="slide-right">
             <component :is="Component"/>
@@ -94,7 +94,13 @@ export default {
       get () {
         return this.$store.state.user;
       }
-    }
+    },
+    appPage: {
+      get () {
+        const appPages = ['Home', 'Translate'];
+        return appPages.includes(this.$route.name) && this.$store.state.translations;
+      }
+    },
   },
   methods: {
     signOut () {
@@ -110,7 +116,6 @@ export default {
     display: flex;
     flex-direction: row;
     max-width: 100%;
-    overflow: hidden;
     height: 100%;
     min-height: 100%;
     background-color: #f5f9fd;
@@ -119,6 +124,9 @@ export default {
   .page.dark {
     background-color: #1f1e2e;
     color: #fff;
+  }
+  .page.app-page {
+    overflow: hidden;
   }
   .sim-profile {
     display: flex;

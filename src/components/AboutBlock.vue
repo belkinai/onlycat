@@ -10,20 +10,13 @@
         <p>
           Разработчик данного сервиса занимается переводами в качестве хобби. Этим обусловлен минималистичный набор функций. Можно загрузить текст, автоматический перевести, отредактировать и выгрузить результат.
         </p>
-      </div>
-      <div class="part-illustration">
-        <img class="about-block__illustration" src="@/assets/cat.png" alt="">
-      </div>
-    </div>
-    <div class="about-part">
-      <div class="part-illustration">
-        <img class="about-block__illustration" src="@/assets/typewriters2.png" alt="">
-      </div>
-      <div class="part-text">
         <h2>Концентрация на тексте</h2>
         <p>
           Основное предназначение сервиса ONLYCAT - дать простой редактор перевода. Редактировать объемный текст лучше в едином пространстве, без разбиения на отдельные фразы. При этом сохранилась посдсветка соответствующих предложений в исходнике. Так удобнее оценивать соседние части текста и вычитывать весь текст тут же.
         </p>
+      </div>
+      <div class="part-illustration">
+        <img class="about-block__illustration" src="@/assets/typewriters2.png" alt="">
       </div>
     </div>
   </div>
@@ -31,11 +24,9 @@
 
 <style>
   .about-block {
-    width: 1300px;
+    width: 980px;
     max-width: 100%;
-    overflow: auto;
     margin: 24px 0 0 0;
-    padding: 24px;
     border-radius: 12px;
   }
   .about-block__illustration {

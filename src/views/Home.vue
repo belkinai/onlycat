@@ -3,7 +3,7 @@
     <div class="page-header">
       <h1>Ваши переводы</h1>
     </div>
-    <div v-if="translations" class="translation-list">
+    <div v-if="Object.keys(translations).length" class="translation-list">
       <div v-for="(translation, i) in translations" :key="i" class="translation-list-item">
         <router-link :to="{name: 'Translate', params: {uuid: i}}"
                      class="translation-list-link"
@@ -12,21 +12,23 @@
         </router-link>
       </div>
     </div>
-    <div v-else class="translation-list">
-      <div class="translation-list-item">
-        У вас еще нет переводов.
-      </div>
+    <div v-else class="translation-list-empty">
+      <div class="translation-list-empty__caption">У вас еще нет переводов.</div>
+      <sim-btn @click="createTranslationModal = true">Добавить новый</sim-btn>
     </div>
-    <about-block v-if="!translations"/>
+    <about-block v-if="!Object.keys(translations).length"/>
   </div>
 </template>
 
 <script>
 import AboutBlock from '@/components/AboutBlock.vue';
+import CreateTranslationModal from '@/mixins/modals/createTranslationModal';
+import SimBtn from "../components/SimBtn";
 
 export default {
   name: 'Home',
-  components: {AboutBlock},
+  components: {SimBtn, AboutBlock},
+  mixins: [CreateTranslationModal],
   computed: {
     translations: {
       get() {
@@ -75,5 +77,15 @@ export default {
   }
   .translation-list-link:active {
     opacity: 0.7;
+  }
+  .translation-list-empty {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 28px 4px;
+  }
+  .translation-list-empty__caption {
+    font-size: 18px;
+    margin: 0 24px 0 0;
   }
 </style>
