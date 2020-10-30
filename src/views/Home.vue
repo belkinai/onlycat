@@ -45,14 +45,13 @@ export default {
     flex-direction: column;
     height: 100%;
     min-height: 100%;
-    width: 1300px;
+    width: 980px;
     max-width: 100%;
   }
   .translation-list {
     border-radius: 4px;
     padding: 8px 0;
     background: #fff;
-    overflow: auto;
   }
   .dark .translation-list {
     background: #272a3b;

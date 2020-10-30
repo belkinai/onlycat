@@ -97,7 +97,7 @@ export default {
     },
     appPage: {
       get () {
-        const appPages = ['Home', 'Translate'];
+        const appPages = ['Translate'];
         return appPages.includes(this.$route.name) && this.$store.state.translations;
       }
     },
@@ -120,6 +120,7 @@ export default {
     min-height: 100%;
     background-color: #f5f9fd;
     transition: all 0.1s ease-in-out;
+    overflow: auto;
   }
   .page.dark {
     background-color: #1f1e2e;

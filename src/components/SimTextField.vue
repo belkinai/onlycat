@@ -28,6 +28,7 @@
       color:      String,
       label:      String,
     },
+    emits: ['update:modelValue'],
     mixins: [Uuid],
     data() {
       return {

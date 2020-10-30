@@ -35,7 +35,7 @@
                         :items="languages"
                         itemValue="model"
                         itemText="name"
-                        label="Язык оригинала"
+                        label="Язык перевода"
             />
           </sim-col>
         </sim-row>
@@ -95,6 +95,8 @@ export default {
     if (this.translation) {
       this.text = this.translation.text;
       this.name = this.translation.name;
+      this.fromLang = this.translation.fromLang;
+      this.toLang = this.translation.toLang;
       this.callToAction = 'Сохранить';
     }
   },
@@ -112,8 +114,8 @@ export default {
           text: this.text,
           originalSentences: originalSentences,
           translatedSentences: [],
-          fromLang: 'en',
-          toLang: 'ru',
+          fromLang: this.fromLang,
+          toLang: this.toLang,
           complete: false,
           updatedAt: Date.now(),
           wordsCount: 0,

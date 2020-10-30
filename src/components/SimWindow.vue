@@ -20,7 +20,6 @@ export default {
     max-width: 100%;
     max-height: 100%;
     padding: 20px 80px;
-    overflow: hidden;
     background: #fff;
     border-radius: 4px;
     box-shadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2),

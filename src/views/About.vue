@@ -20,7 +20,7 @@
     flex-direction: column;
     height: 100%;
     min-height: 100%;
-    width: 1300px;
+    width: 980px;
     max-width: 100%;
   }
 </style>
