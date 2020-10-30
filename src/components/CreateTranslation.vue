@@ -11,14 +11,34 @@
            @dragover.prevent
       >
         <div>
-          <input id="realty-form-images" hidden type="file" multiple @change="selectFiles"/>
+          <input id="doc-file" hidden type="file" multiple @change="selectFiles"/>
           <span>
-                  Перетащите сюда фотографии, или
-                  <label for="realty-form-images">
+                  Перетащите сюда документ, или
+                  <label for="doc-file">
                     <span class="pseudo-link">нажмите сюда, чтобы выбрать на компьютере</span>
                   </label>
                 </span>
         </div>
+      </div>
+      <div>
+        <sim-row>
+          <sim-col :cols="3">
+            <sim-select v-model="fromLang"
+                        :items="languages"
+                        itemValue="model"
+                        itemText="name"
+                        label="Язык оригинала"
+            />
+          </sim-col>
+          <sim-col :cols="3">
+            <sim-select v-model="toLang"
+                        :items="languages"
+                        itemValue="model"
+                        itemText="name"
+                        label="Язык оригинала"
+            />
+          </sim-col>
+        </sim-row>
       </div>
     </sim-window-body>
     <sim-window-footer>
@@ -39,6 +59,10 @@ import SimWindowFooter from '@/components/SimWindowFooter.vue';
 import SimSpacer from '@/components/SimSpacer.vue';
 import SimTextField from '@/components/SimTextField.vue';
 import SimTextArea from '@/components/SimTextArea.vue';
+import SimSelect from '@/components/SimSelect.vue';
+import SimRow from '@/components/SimRow.vue';
+import SimCol from '@/components/SimCol.vue';
+import languageModels from "@/mixins/languageModels";
 import tokenizer from 'sbd';
 import mammoth from 'mammoth';
 
@@ -49,11 +73,14 @@ export default {
     uuid:        String,
   },
   components: { SimBtn, SimWindow, SimWindowHeader, SimWindowBody, SimWindowFooter, SimTextField, SimTextArea,
-    SimSpacer },
+    SimSpacer, SimSelect, SimRow, SimCol },
+  mixins: [languageModels],
   data() {
     return {
       text: '',
       name: '',
+      fromLang: 'en',
+      toLang: 'en',
       callToAction: 'Добавить',
       files: [],
     };

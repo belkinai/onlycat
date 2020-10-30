@@ -115,12 +115,7 @@ export default {
   computed: {
     translation: {
       get () {
-        let translation = this.$store.state.translations[this.uuid];
-        if (translation) {
-          return JSON.parse(JSON.stringify(translation));
-        } else {
-          return {};
-        }
+        return this.$store.getters.getTranslation(this.uuid);
       },
     },
     percent: {

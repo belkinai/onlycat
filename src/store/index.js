@@ -69,6 +69,18 @@ export default createStore({
       });
     },
   },
+  getters: {
+    getTranslation (state) {
+      return uuid => {
+        const translation = state.translations[uuid];
+        if (translation) {
+          return JSON.parse(JSON.stringify(translation));
+        } else {
+          return {};
+        }
+      };
+    },
+  },
   modules: {
   },
 });
