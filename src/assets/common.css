@@ -46,6 +46,26 @@ body, html, .app {
   margin-right: 20px;
 }
 
+.pseudo-link {
+  color: #5116dd;
+  border-bottom: 1px dashed #5116dd;
+  cursor: pointer;
+}
+.dark .pseudo-link {
+  color: #88e;
+  border-bottom: 1px dashed #88e;
+}
+.pseudo-link:hover {
+  opacity: 0.9;
+}
+.pseudo-link:active {
+  opacity: 0.8;
+}
+
+.form-line {
+  padding: 20px 0;
+}
+
 /*Transitions*/
 .modal-enter-active, .modal-leave-active {
   transition: all 0.15s cubic-bezier(0.25, 0.8, 0.5, 1);

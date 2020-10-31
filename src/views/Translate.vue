@@ -46,15 +46,15 @@
       </div>
       <div class="translate-controls__center">
         <div class="translate-controls__lang">
-          EN
+          {{ translation.fromLang }}
         </div>
         <sim-btn @click="translate" :loading="translating">Перевести</sim-btn>
         <div class="translate-controls__lang">
-          RU
+          {{ translation.toLang }}
         </div>
       </div>
       <div class="translate-controls__end">
-        <sim-btn icon><sim-icon :class="'lni-download'" size="16px"/></sim-btn>
+        <sim-btn icon @click="saveFile"><sim-icon :class="'lni-download'" size="16px"/></sim-btn>
       </div>
     </div>
     <div id="translation-original" class="translate-container">
@@ -96,6 +96,8 @@ import CreateTranslation from '../components/CreateTranslation';
 import darkMode from '@/mixins/darkMode';
 import PrettyDate from '../filters/prettyDate';
 import Plural from '../filters/plural';
+import { Document, Packer, Paragraph } from "docx";
+import saveAs from 'file-saver';
 
 export default {
   name: 'Translate',
@@ -190,6 +192,27 @@ export default {
       sentence.status = 1;
       this.countReadySentences();
       this.save();
+    },
+    saveFile() {
+      const doc = new Document();
+      let textRuns = [];
+      let outText = '';
+      this.translation.translatedSentences.forEach(sentence => {
+        outText += sentence.text;
+      });
+      outText.split('\n').forEach((paragraphText) => {
+        textRuns.push(
+          new Paragraph(
+            {text: paragraphText}
+          )
+        );
+      });
+      doc.addSection({
+        children: textRuns,
+      });
+      Packer.toBlob(doc).then((blob) => {
+        saveAs(blob, this.translation.name + '.docx');
+      });
     },
   },
 }

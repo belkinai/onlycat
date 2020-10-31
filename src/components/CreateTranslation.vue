@@ -6,35 +6,30 @@
     <sim-window-body>
       <sim-text-field v-model="name" color="#a859ff" label="Название"/>
       <sim-text-area v-model="text" color="#a859ff" label="Текст"/>
-      <div v-cloak
-           @drop.prevent="addDropFile"
-           @dragover.prevent
-      >
-        <div>
-          <input id="doc-file" hidden type="file" multiple @change="selectFiles"/>
-          <span>
-                  Перетащите сюда документ, или
-                  <label for="doc-file">
-                    <span class="pseudo-link">нажмите сюда, чтобы выбрать на компьютере</span>
-                  </label>
-                </span>
-        </div>
+      <div class="form-line">
+        <input id="doc-file" hidden type="file" @change="selectFiles" accept=".docx"/>
+        <span>
+          Вставьте текст в поле выше, или
+          <label for="doc-file">
+            <span class="pseudo-link">нажмите сюда, чтобы выбрать на компьютере docx файл</span>
+          </label>
+        </span>
       </div>
       <div>
         <sim-row>
           <sim-col :cols="3">
             <sim-select v-model="fromLang"
                         :items="languages"
-                        itemValue="model"
-                        itemText="name"
+                        itemValue="language"
+                        itemText="language_name"
                         label="Язык оригинала"
             />
           </sim-col>
           <sim-col :cols="3">
             <sim-select v-model="toLang"
                         :items="languages"
-                        itemValue="model"
-                        itemText="name"
+                        itemValue="language"
+                        itemText="language_name"
                         label="Язык перевода"
             />
           </sim-col>
@@ -46,7 +41,9 @@
       <sim-spacer/>
       <sim-btn color="#5927b9" dark @click="createTranslation">{{ callToAction }}</sim-btn>
     </sim-window-footer>
-    <div class="modal-close" @click="close">&#9711;</div>
+    <div class="modal-close" @click="close">
+      <sim-icon :class="'lni-close'" size="20px"/>
+    </div>
   </sim-window>
 </template>
 
@@ -62,6 +59,7 @@ import SimTextArea from '@/components/SimTextArea.vue';
 import SimSelect from '@/components/SimSelect.vue';
 import SimRow from '@/components/SimRow.vue';
 import SimCol from '@/components/SimCol.vue';
+import SimIcon from "./SimIcon";
 import languageModels from "@/mixins/languageModels";
 import tokenizer from 'sbd';
 import mammoth from 'mammoth';
@@ -72,8 +70,8 @@ export default {
     translation: Object,
     uuid:        String,
   },
-  components: { SimBtn, SimWindow, SimWindowHeader, SimWindowBody, SimWindowFooter, SimTextField, SimTextArea,
-    SimSpacer, SimSelect, SimRow, SimCol },
+  components: { SimBtn, SimWindow, SimWindowHeader, SimWindowBody, SimWindowFooter,
+    SimTextField, SimTextArea, SimSpacer, SimSelect, SimRow, SimCol, SimIcon },
   mixins: [languageModels],
   data() {
     return {
@@ -86,12 +84,6 @@ export default {
     };
   },
   created() {
-    mammoth.extractRawText({path: "path/to/document.docx"})
-      .then(function(result){
-        console.log(result.value);
-        console.log(result.messages);
-      })
-      .done();
     if (this.translation) {
       this.text = this.translation.text;
       this.name = this.translation.name;
@@ -129,12 +121,20 @@ export default {
     close () {
       this.$emit('update:modelValue', false);
     },
-    addDropFile(e) {
-      this.files = Array.from(e.dataTransfer.files);
-    },
-    selectFiles(event) {
+    selectFiles (event) {
       this.files = event.target.files;
-      console.log(this.files);
+      const file = this.files[0],
+            reader = new FileReader();
+      console.log(file);
+      reader.onloadend = () => {
+        const arrayBuffer = reader.result;
+        mammoth.extractRawText({arrayBuffer: arrayBuffer})
+          .then((result) => {
+            this.text = result.value;
+          })
+          .done();
+      };
+      reader.readAsArrayBuffer(file);
     },
   },
 }
