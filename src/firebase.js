@@ -1,7 +1,6 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
-import 'firebase/functions';
 
 const firebaseConfig = {
   apiKey: process.env.VUE_APP_FB_API_KEY,
@@ -14,16 +13,12 @@ const firebaseConfig = {
   measurementId: process.env.VUE_APP_FB_MEASUREMENT_ID,
 };
 firebase.initializeApp(firebaseConfig);
-
 const db = firebase.firestore();
 const auth = firebase.auth();
-const functions = firebase.functions();
-
 const translationsCollection = db.collection('translations');
 
 export {
   db,
   auth,
-  functions,
   translationsCollection,
 };

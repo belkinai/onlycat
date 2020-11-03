@@ -1,10 +1,10 @@
 <template>
   <div v-if="translation" class="translate">
-    <vue-headful
-            :title="translation.name + ' - ONLYCAT'"
-    />
+    <vue-headful :title="translation.name + ' - ONLYCAT'"/>
     <sim-dialog v-model="editTranslationModal" modal>
-      <create-translation v-model="editTranslationModal" :translation="translation" :uuid="uuid"/>
+      <create-translation v-model="editTranslationModal"
+                          :translation="translation"
+                          :uuid="uuid"/>
     </sim-dialog>
     <div class="page-header">
       <router-link :to="{name: 'Home'}">
@@ -18,16 +18,22 @@
     <div class="translate-status">
       <span v-if="translation.wordsCount">
         Готовность:
-        <span class="translate-percent" :class="{'translate-percent__ready': percent === 100}">
+        <span class="translate-percent"
+              :class="{'translate-percent__ready': percent === 100}">
           {{ percent }} %
         </span>
-        <span class="translate-percent" :class="{'translate-percent__ready': percent === 100}">
+        <span class="translate-percent"
+              :class="{'translate-percent__ready': percent === 100}">
           {{ translation.readyWordsCount }} / {{ translation.wordsCount }}
           {{ pluralize(translation.wordsCount, ['слово', 'слова', 'слов']) }}
         </span>
       </span>
-      <span v-if="!loading">Последнее сохранение: {{ prettyDate(translation.updatedAt) }}</span>
-      <span v-if="loading"><sim-icon :class="'lni-spiner-solid'" size="16px" spin/></span>
+      <span v-if="!loading">
+        Последнее сохранение: {{ prettyDate(translation.updatedAt) }}
+      </span>
+      <span v-if="loading">
+        <sim-icon :class="'lni-spiner-solid'" size="16px" spin/>
+      </span>
     </div>
     <div class="translate-status">
       <span>
@@ -88,7 +94,6 @@
 </template>
 
 <script>
-import { functions } from '../firebase';
 import SimBtn from '../components/SimBtn';
 import SimIcon from '../components/SimIcon';
 import SimDialog from '../components/SimDialog';
@@ -98,6 +103,7 @@ import PrettyDate from '../filters/prettyDate';
 import Plural from '../filters/plural';
 import { Document, Packer, Paragraph } from "docx";
 import saveAs from 'file-saver';
+import axios from 'axios';
 
 export default {
   name: 'Translate',
@@ -132,26 +138,26 @@ export default {
   methods: {
     translate () {
       this.translating = true;
-      var translate = functions.httpsCallable('translateWatson');
       const translationData = {
         sentences: this.translation.originalSentences,
         modelId: this.translation.fromLang + '-' + this.translation.toLang,
       };
-      translate(translationData).then((result) => {
-        this.translation.translatedSentences = [];
-        this.translation.wordsCount = 0;
-        this.translation.readyWordsCount = 0;
-        result.data.result.translations.forEach((translation) => {
-          this.translation.translatedSentences.push({
-            status: 0,
-            text: translation.translation,
+      const url = process.env.VUE_APP_TRANSLATION_ENDPOINT;
+      axios.post(url, translationData).then(result => {
+          this.translation.translatedSentences = [];
+          this.translation.wordsCount = 0;
+          this.translation.readyWordsCount = 0;
+          result.data.translations.forEach((translation) => {
+            this.translation.translatedSentences.push({
+              status: 0,
+              text: translation.translation,
+            });
+            if (translation.translation) {
+              this.translation.wordsCount += translation.translation.split(' ').length;
+            }
           });
-          if (translation.translation) {
-            this.translation.wordsCount += translation.translation.split(' ').length;
-          }
-        });
-        this.translating = false;
-        this.save();
+          this.translating = false;
+          this.save();
       });
     },
     edit (e, i) {
