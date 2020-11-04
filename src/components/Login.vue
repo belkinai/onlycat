@@ -27,10 +27,25 @@ export default {
     var uiConfig = {
       signInFlow: 'popup',
       signInSuccessUrl: "/",
-      signInOptions: [firebase.auth.GithubAuthProvider.PROVIDER_ID]
+      tosUrl: '/terms',
+      privacyPolicyUrl: '/policy',
+      signInOptions: [
+        firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+        firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+        firebase.auth.GithubAuthProvider.PROVIDER_ID
+      ]
     };
     ui.start("#firebaseui-auth-container", uiConfig);
   },
 }
 
 </script>
+
+<style>
+  .firebaseui-card-content {
+    padding: 0;
+  }
+  .firebaseui-idp-button, .firebaseui-tenant-button {
+    max-width: 100%;
+  }
+</style>

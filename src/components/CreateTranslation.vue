@@ -59,7 +59,7 @@ import SimTextArea from '@/components/SimTextArea.vue';
 import SimSelect from '@/components/SimSelect.vue';
 import SimRow from '@/components/SimRow.vue';
 import SimCol from '@/components/SimCol.vue';
-import SimIcon from "./SimIcon";
+import SimIcon from "@/components/SimIcon";
 import languageModels from "@/mixins/languageModels";
 import tokenizer from 'sbd';
 import mammoth from 'mammoth';

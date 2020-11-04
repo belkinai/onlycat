@@ -25,6 +25,14 @@ export default createStore({
     setStoreTranslation (state, data) {
       state.translations[data.key] = data.value;
     },
+    deleteTranslation (state, data) {
+      delete state.translations[data.uuid];
+      if (fb.auth.currentUser) {
+        fb.translationsCollection.doc(data.uuid).delete();
+      } else {
+        window.localStorage.setItem('translations', JSON.stringify(state.translations));
+      }
+    },
     updateTranslation (state, data) {
       state.translations[data.key] = data.value;
     },
