@@ -1,4 +1,4 @@
-# simcat
+# Onlycat Lite
 
 ## Project setup
 ```
