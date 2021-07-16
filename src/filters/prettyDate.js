@@ -6,7 +6,7 @@ export default {
     if(!(date instanceof Date)) {
       let originalDate = date;
       date = new Date(date);
-      if (date === 'Invalid Date') {
+      if (date.toString() === 'Invalid Date') {
         return originalDate;
       }
     }
